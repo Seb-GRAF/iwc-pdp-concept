@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pilot’s Watch Chronograph 41 - IW388101 | IWC Schaffhausen</title>
+  <link rel="preload" href="assets/fonts/HelveticaNeue-55-Roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/HelveticaNeue-65-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+  <script src="main.js" defer></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.min.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="field.js" type="module"></script>
+  <script src="features.js" type="module"></script>
+  <script src="drawing.js" type="module"></script>
+</head>
+<body>
+  <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+    <symbol viewBox="0 0 108 42" id="logo-full"><path d="M22.71 23.447v-.599c1.788-.099 2.62-.497 2.62-1.99V2.819c0-1.492-.83-1.922-2.455-1.99V.233h8.356V.83c-1.591.067-2.42.497-2.42 1.99v18.04c0 1.492.829 1.89 2.62 1.99v.598zM62.737 3.58l-7.394 20.03h-.596L49.506 8.553 43.238 23.61h-.596L35.444 2.786c-.43-1.227-.962-1.856-2.652-1.957V.232h8.622V.83c-1.692.099-2.155.663-2.155 1.425 0 .399.23 1.128.465 1.757l4.51 13.1L48.714 6.2 47.45 2.487C47.055 1.359 46.424.928 44.932.829V.232h8.589V.83c-1.99.034-2.222.697-2.222 1.227 0 .364.133.928.364 1.559l4.512 13.032 4.278-11.641c.564-1.524.73-2.454.73-2.818 0-.896-.697-1.26-2.355-1.361V.232h7.395V.83c-1.758.099-2.684.63-3.483 2.752M76.5 23.944c-7.195 0-11.342-5.073-11.342-12.104C65.158 7.595 67.712 0 76.6 0c4.013 0 5.074 1.559 6.465 1.559.53 0 .896-.265.995-1.26h.598l.265 7.064h-.695c-.896-4.045-3.848-6.035-7.33-6.035-1.825 0-3.515.629-4.841 1.99-1.69 1.724-2.752 4.575-2.752 8.522 0 6.136 2.72 10.513 7.96 10.513 3.515 0 5.703-1.393 7.428-4.113l.598.332c-1.759 3.415-4.676 5.372-8.789 5.372M3.045 37.005c1.422.345 2.161.855 2.161 1.978 0 1.267-.989 2.016-2.401 2.016A4.14 4.14 0 0 1 0 39.924l.71-.846c.645.557 1.287.875 2.124.875.73 0 1.19-.336 1.19-.856 0-.49-.268-.749-1.516-1.037C1.077 37.717.27 37.293.27 36.045c0-1.171.96-1.958 2.296-1.958.98 0 1.757.297 2.439.846l-.635.893c-.606-.451-1.21-.692-1.825-.692-.692 0-1.096.355-1.096.807 0 .528.307.758 1.595 1.065m8.778 4.012c-1.959 0-3.418-1.526-3.418-3.466s1.43-3.486 3.466-3.486c1.239 0 1.988.433 2.632 1.047l-.759.874c-.537-.499-1.115-.834-1.883-.834-1.286 0-2.218 1.055-2.218 2.382 0 1.326.932 2.4 2.219 2.4.825 0 1.354-.335 1.93-.874l.758.768c-.701.73-1.469 1.19-2.727 1.19zm7.838-2.948v2.834h-1.18V34.18h1.181v2.795h3.207V34.18h1.182v6.723h-1.182V38.07zm15.04 2.834h-1.25l-.681-1.624H29.59l-.692 1.624h-1.21l2.958-6.77h1.096zm-3.524-5.359-1.153 2.689h2.315zm11.986-.289h-3.823v1.834h3.39v1.075h-3.39v2.737h-1.181v-6.723h5.004zm8.988 0h-3.822v1.834h3.39v1.075h-3.39v2.737h-1.181v-6.723h5.004zm4.591 2.814v2.834H55.56V34.18h1.181v2.795h3.207V34.18h1.182v6.723h-1.182V38.07zm15.243 2.834h-1.248l-.682-1.624h-3.179l-.692 1.624h-1.21l2.958-6.77h1.096zm-3.525-5.359-1.153 2.689h2.315zm12.198 2.449c0 2.006-1.134 3.016-2.891 3.016s-2.863-1.008-2.863-2.957v-3.87h1.182v3.822c0 1.248.644 1.921 1.7 1.921s1.69-.635 1.69-1.873v-3.87h1.181v3.813zm6.511-.989c1.421.345 2.16.855 2.16 1.978 0 1.267-.988 2.016-2.4 2.016a4.14 4.14 0 0 1-2.805-1.075l.71-.846c.645.557 1.287.875 2.123.875.73 0 1.191-.336 1.191-.856 0-.49-.268-.749-1.516-1.037-1.431-.344-2.238-.767-2.238-2.016 0-1.171.96-1.958 2.297-1.958.98 0 1.757.297 2.439.846l-.635.893c-.604-.451-1.21-.692-1.825-.692-.692 0-1.096.355-1.096.807 0 .528.307.758 1.595 1.065m10.842-1.769h-3.803v1.748h3.371v1.055h-3.37v1.807h3.85v1.056h-5.032v-6.723h4.985zm8.828-1.056H108v6.724h-.989l-3.706-4.783v4.783h-1.163V34.18h1.096l3.601 4.648V34.18z"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="search"><path stroke="currentColor" stroke-width="1.5" d="M10.119 2.975a7.125 7.125 0 1 1 0 14.25 7.125 7.125 0 0 1 0-14.25Zm6.994 13.168 4.242 4.243"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="phone"><path stroke="currentColor" stroke-miterlimit="10" stroke-width="1.5" d="m12.645 15.14 2.911-1.72c.33-.2.75-.18 1.07.03l3.772 2.531c.39.39.39 1.01.01 1.4l-1.77 1.831c-.28.29-.63.5-1.031.57a12.01 12.01 0 0 1-10.784-3.3A12 12 0 0 1 3.53 5.676c.07-.38.27-.73.55-1l1.801-1.801a.996.996 0 0 1 1.41 0l2.422 3.661c.21.32.22.73.03 1.06l-1.72 2.922 4.537 4.538z"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="user"><circle cx="12" cy="7.327" r="4.875" stroke="currentColor" stroke-width="1.5"/><path d="M3 20.283a10.496 10.496 0 0 1 9-5.081c3.822 0 7.163 2.037 9 5.081" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="bookmark"><path stroke="currentColor" stroke-width="1.5" d="M19 3.858H5v16.17l7-4.045 7 4.067z"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="bag"><path stroke="currentColor" stroke-width="1.5" d="m18.871 6.047 1.515 13.98H3.616l1.513-13.98zM8 2.654h8"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="arrow-right"><path stroke="currentColor" stroke-width="1.5" d="m14.827 8.624 3.425 3.426-3.425 3.425M5.748 12.05h12.504"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="menu"><path stroke="currentColor" stroke-width="1.5" d="M3 15.747h17m-17-8h17"/></symbol>
+    <symbol viewBox="0 0 24 24" id="triangle-down"><path d="m12 15.875-6.2-7.75h12.4l-6.2 7.75Z"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="arrow-left"><path stroke="currentColor" stroke-width="1.5" d="M9.18 15.475 5.755 12.05 9.18 8.624m9.072 3.426H5.748"/></symbol>
+  </svg>
+  <nav class="nav">
+    <div class="nav__section nav__section--start">
+      <button class="nav__button nav__button--menu caps" type="button">
+        <svg class="icon nav__burger" aria-hidden="true"><use href="#menu"/></svg>
+        <span class="nav__menu-label">Menu</span>
+      </button>
+      <button class="nav__button" type="button" aria-label="Search"><svg class="icon" aria-hidden="true"><use href="#search"/></svg></button>
+    </div>
+    <a class="nav__logo" href="#top" aria-label="IWC Schaffhausen"><svg aria-hidden="true"><use href="#logo-full"/></svg></a>
+    <div class="nav__section nav__section--end">
+      <a class="nav__button" href="#services" aria-label="Contact"><svg class="icon" aria-hidden="true"><use href="#phone"/></svg></a>
+      <a class="nav__button nav__button--desktop" href="#top" aria-label="Account"><svg class="icon" aria-hidden="true"><use href="#user"/></svg></a>
+      <a class="nav__button nav__button--desktop" href="#top" aria-label="Wishlist"><svg class="icon" aria-hidden="true"><use href="#bookmark"/></svg></a>
+      <a class="nav__button nav__bag" href="#top" aria-label="Shopping bag"><svg class="icon" aria-hidden="true"><use href="#bag"/></svg><span class="nav__count" hidden>0</span></a>
+    </div>
+  </nav>
+  <main id="top">
+    <section class="buy" aria-labelledby="product-title">
+      <div class="buy__name">
+        <a class="caps link" href="#collection">Pilot’s Watches</a>
+        <h1 class="buy__title" id="product-title">Pilot’s Watch Chronograph 41</h1>
+      </div>
+
+      <div class="buy__aside">
+        <p class="buy__price"><span class="buy__amount" data-bind="price">CHF 6’700</span><span class="buy__vat">VAT included · <span data-bind="ref">IW388101</span></span></p>
+        <div class="buy__specs" id="details" data-lenis-prevent>
+          <details name="specs">
+            <summary>Overview<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+            <dl class="rows">
+              <div class="row"><dt>Reference</dt><dd data-bind="ref">IW388101</dd></div>
+              <div class="row"><dt>Dial colour</dt><dd data-bind="dial">Blue</dd></div>
+              <div class="row"><dt>Case</dt><dd data-bind="case">Stainless steel</dd></div>
+              <div class="row"><dt>Strap</dt><dd data-bind="strap-name">Blue calfskin strap</dd></div>
+              <div class="row"><dt>Diameter</dt><dd>41 mm</dd></div>
+            </dl>
+          </details>
+          <details name="specs">
+            <summary>Case<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+            <dl class="rows">
+              <div class="row"><dt>Height</dt><dd>14.5 mm</dd></div>
+              <div class="row"><dt>Water resistance</dt><dd>10 bar</dd></div>
+              <div class="row"><dt>Crown</dt><dd>Screwed-in</dd></div>
+              <div class="row"><dt>Case back</dt><dd>Sapphire crystal</dd></div>
+              <div class="row"><dt>Strap width</dt><dd>20 mm</dd></div>
+              <div class="row"><dt>Buckle width</dt><dd>18 mm</dd></div>
+            </dl>
+          </details>
+          <details name="specs">
+            <summary>Movement<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+            <dl class="rows">
+              <div class="row"><dt>Calibre</dt><dd>69385</dd></div>
+              <div class="row"><dt>Type</dt><dd>Automatic, self-winding</dd></div>
+              <div class="row"><dt>IWC-manufactured</dt><dd>Yes</dd></div>
+              <div class="row"><dt>Power reserve</dt><dd>46 hours</dd></div>
+              <div class="row"><dt>Frequency</dt><dd>28,800 vph (4 Hz)</dd></div>
+              <div class="row"><dt>Components</dt><dd>242</dd></div>
+              <div class="row"><dt>Jewels</dt><dd>33</dd></div>
+            </dl>
+          </details>
+          <details name="specs">
+            <summary>Features<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+            <ul class="buy__features">
+              <li>Chronograph function with hours, minutes and seconds</li>
+              <li>Small hacking seconds</li>
+              <li>Day and date display</li>
+              <li>Sapphire glass, convex, antireflective coating on both sides</li>
+              <li>Glass secured against displacement by drop in air pressure</li>
+              <li>IWC EasX-CHANGE® system</li>
+            </ul>
+          </details>
+          <a class="caps link buy__manual" href="#details">User manual</a>
+        </div>
+      </div>
+
+      <div class="buy__stage">
+        <canvas class="buy__field" aria-hidden="true"></canvas>
+        <div class="buy__views"></div>
+        <ol class="buy__thumbs" aria-label="Views"></ol>
+      </div>
+
+      <div class="buy__variants">
+        <p class="picker__label"><span class="caps">Variants</span><span data-bind="variant">Blue dial, blue calfskin</span></p>
+        <div class="variants" role="radiogroup" aria-label="Variants"></div>
+      </div>
+
+      <div class="buy__ctas">
+        <button class="btn btn--primary" type="button" data-add-to-bag>Add to bag</button>
+        <a class="btn btn--secondary" href="#services">Book an appointment</a>
+        <p class="buy__note">Complimentary delivery in 3 to 5 business days</p>
+      </div>
+    </section>
+
+    <section class="features" aria-labelledby="features-title">
+      <div class="features__intro">
+        <p class="caps">Pilot’s Watch Chronograph 41</p>
+        <h2 class="big features__title" id="features-title">Features</h2>
+      </div>
+      <ol class="features__cards">
+        <li class="card" data-view="3" data-mode="0">
+          <div class="card__inner">
+            <canvas class="card__canvas" aria-hidden="true"></canvas>
+            <div class="card__shade"></div>
+            <div class="card__caption">
+              <h3>Chronograph</h3>
+              <p>Hours, minutes and seconds. Start and stop at 2 o’clock, reset at 4 o’clock.</p>
+            </div>
+          </div>
+        </li>
+        <li class="card" data-view="1" data-mode="1">
+          <div class="card__inner">
+            <canvas class="card__canvas" aria-hidden="true"></canvas>
+            <div class="card__shade"></div>
+            <div class="card__caption">
+              <h3>Luminescent hands and numerals</h3>
+              <p>The dial stays readable after the lights go out.</p>
+            </div>
+          </div>
+        </li>
+        <li class="card" data-view="2" data-mode="2">
+          <div class="card__inner">
+            <canvas class="card__canvas" aria-hidden="true"></canvas>
+            <div class="card__shade"></div>
+            <div class="card__caption">
+              <h3>Calibre 69385</h3>
+              <p>IWC-manufactured and self-winding, with a 46-hour power reserve.</p>
+            </div>
+          </div>
+        </li>
+        <li class="card" data-view="5" data-mode="3">
+          <div class="card__inner">
+            <canvas class="card__canvas" aria-hidden="true"></canvas>
+            <div class="card__shade"></div>
+            <div class="card__caption">
+              <h3>Water-resistant to 10 bar</h3>
+              <p>Screw-in crown, sapphire glass on the dial and the case back.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="showroom theme-dark" aria-labelledby="showroom-title" tabindex="-1">
+      <div class="showroom__skies" aria-hidden="true"></div>
+      <div class="showroom__track" aria-hidden="true"></div>
+      <div class="showroom__ui">
+        <div class="showroom__head">
+          <h2 class="caps" id="showroom-title">Variations</h2>
+          <p class="caps showroom__count"><span data-showroom="index">01</span> / <span data-showroom="total">08</span></p>
+        </div>
+        <div class="showroom__name" aria-live="polite">
+          <p class="showroom__dial" data-showroom="dial">Blue dial</p>
+          <p class="showroom__strap" data-showroom="strap">Stainless steel case, blue calfskin strap</p>
+        </div>
+        <div class="showroom__meta">
+          <p class="caps" data-showroom="ref">IW388101</p>
+          <p data-showroom="price">CHF 6’700</p>
+          <button class="btn btn--secondary showroom__select" type="button" data-showroom-select>Select</button>
+        </div>
+        <div class="showroom__nav">
+          <button class="round" type="button" data-showroom-step="-1" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#arrow-left"/></svg></button>
+          <button class="round" type="button" data-showroom-step="1" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="straps" id="straps" aria-labelledby="straps-title">
+      <div class="straps__intro">
+        <p class="caps">EasX-CHANGE®</p>
+        <h2 id="straps-title">Change the strap in seconds</h2>
+        <p class="straps__text">Press the button on the underside of the strap to release it, then click in the next one. No tools needed.</p>
+        <p class="straps__links"><a class="caps link" href="#straps">Find your strap</a><span>Straps are sold without buckle.</span></p>
+      </div>
+      <div class="straps__stage">
+        <div class="straps__rail" aria-hidden="true"></div>
+        <img class="straps__case" src="assets/straps/head-388101.webp" width="1297" height="1498" alt="">
+      </div>
+      <div class="straps__controls">
+        <button class="round" type="button" data-strap-step="-1" aria-label="Previous strap"><svg class="icon" aria-hidden="true"><use href="#arrow-left"/></svg></button>
+        <p class="straps__name" aria-live="polite"><span data-strap="name">Blue calfskin</span><span class="straps__count" data-strap="index">03 / 06</span></p>
+        <button class="round" type="button" data-strap-step="1" aria-label="Next strap"><svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button>
+      </div>
+    </section>
+
+    <section class="specs" id="specifications" aria-labelledby="specs-title">
+      <h2 class="caps specs__title" id="specs-title">Specifications</h2>
+      <div class="specs__body">
+        <div class="specs__drawing" aria-hidden="true">
+          <canvas class="specs__canvas"></canvas>
+          <div class="specs__marks"></div>
+        </div>
+        <div class="lineup">
+          <div class="chapter">
+            <p class="lineup__row"><span class="big" data-count>41</span><span class="lineup__label">millimetres across. The 41 in its name.</span></p>
+          </div>
+          <div class="chapter">
+            <p class="lineup__row"><span class="big" data-count>10</span><span class="lineup__label">bar. Screw-in crown, sapphire glass front and back.</span></p>
+          </div>
+          <div class="chapter">
+            <p class="lineup__row"><span class="big" data-count>14.5</span><span class="lineup__label">millimetres high,</span></p>
+            <p class="lineup__row"><span class="big" data-count>20</span><span class="lineup__label">between the lugs.</span></p>
+          </div>
+          <div class="chapter">
+            <p class="lineup__row"><span class="big" data-count>242</span><span class="lineup__label">components in calibre 69385, made by IWC. 33 of them are jewels.</span></p>
+            <p class="lineup__row"><span class="big" data-count>46</span><span class="lineup__label">hours of power reserve, fully wound.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story theme-dark" id="collection" aria-labelledby="collection-title">
+      <video class="story__film" src="assets/video/collection.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="story__copy">
+        <p class="caps">About the collection</p>
+        <h2 id="collection-title">90 years of Pilot’s Watches</h2>
+        <p class="story__text">Since the first Special Pilot’s Watch, the brief has stayed the same: a dial you can read at a glance, in any light, on a watch built for the cockpit.</p>
+        <a class="caps link" href="#collection">Discover the collection</a>
+      </div>
+      <p class="big story__year"><span class="kern">1</span>936</p>
+    </section>
+
+    <section class="gallery" aria-labelledby="gallery-title">
+      <div class="sheet">
+        <div class="sheet__row">
+          <p class="caps sheet__cell sheet__cell--4">Gallery</p>
+          <h2 class="sheet__cell sheet__cell--8" id="gallery-title">Up close and on the wrist</h2>
+        </div>
+        <div class="sheet__row">
+          <figure class="sheet__cell sheet__cell--8">
+            <div class="sheet__media sheet__media--shirt"><img src="assets/wrist/shirt.webp" width="1600" height="1340" alt="The watch on the wrist, worn with a navy linen shirt" loading="lazy"></div>
+            <figcaption class="sheet__caption"><span class="caps">01</span><span>On the wrist, with the stainless steel bracelet</span><span class="caps">IW388102</span></figcaption>
+          </figure>
+          <div class="sheet__cell sheet__cell--4 sheet__stack">
+            <figure class="sheet__fill">
+              <div class="sheet__media"><video src="assets/video/case.mp4" poster="assets/video/case.jpg" width="1280" height="720" muted playsinline preload="none" aria-hidden="true"></video></div>
+              <figcaption class="sheet__caption"><span class="caps">02</span><span>Pusher and screw-in crown</span><span class="caps">Case</span></figcaption>
+            </figure>
+            <figure class="sheet__fill">
+              <div class="sheet__media"><img src="assets/video/movement.jpg" width="1280" height="720" alt="The movement seen through the sapphire case back" loading="lazy"></div>
+              <figcaption class="sheet__caption"><span class="caps">03</span><span>Calibre 69385 through the sapphire case back</span><span class="caps">Movement</span></figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="sheet__row">
+          <figure class="sheet__cell sheet__cell--4 sheet__fill">
+            <div class="sheet__media"><img src="assets/video/lume.jpg" width="1600" height="900" alt="The hands and numerals glowing in the dark" loading="lazy"></div>
+            <figcaption class="sheet__caption"><span class="caps">04</span><span>Luminescent hands and numerals</span><span class="caps">Lume</span></figcaption>
+          </figure>
+          <figure class="sheet__cell sheet__cell--8">
+            <div class="sheet__media sheet__media--close"><img src="assets/wrist/close.webp" width="1600" height="980" alt="Close-up of the blue dial on the wrist" loading="lazy"></div>
+            <figcaption class="sheet__caption"><span class="caps">05</span><span>Blue dial, modelled on cockpit instruments</span><span class="caps">Dial</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="related-title">
+      <h2 class="caps" id="related-title">More Pilot’s Watches</h2>
+      <ul class="products">
+        <li><a class="product" href="#collection"><span class="product__frame"><img class="product__sky" src="assets/sky/graphite.jpg" width="2400" height="1500" alt="" loading="lazy"><img class="product__watch" src="assets/img/rel-328201.webp" width="834" height="963" alt="" loading="lazy"><span class="caps product__size">40 mm</span></span><span class="product__name">Pilot’s Watch Mark XX</span><span class="product__meta">IW328201</span><span>CHF 4’900</span></a></li>
+        <li><a class="product" href="#collection"><span class="product__frame"><img class="product__sky" src="assets/sky/blue.jpg" width="2400" height="1500" alt="" loading="lazy"><img class="product__watch" src="assets/img/rel-329303.webp" width="834" height="963" alt="" loading="lazy"><span class="caps product__size">43 mm</span></span><span class="product__name">Big Pilot’s Watch 43</span><span class="product__meta">IW329303</span><span>CHF 8’300</span></a></li>
+        <li><a class="product" href="#collection"><span class="product__frame"><img class="product__sky" src="assets/sky/graphite.jpg" width="2400" height="1500" alt="" loading="lazy"><img class="product__watch" src="assets/img/rel-389401.webp" width="834" height="963" alt="" loading="lazy"><span class="caps product__size">41 mm</span></span><span class="product__name">Pilot’s Watch Chronograph 41 TOP GUN</span><span class="product__meta">IW389401</span><span>CHF 8’300</span></a></li>
+        <li><a class="product" href="#collection"><span class="product__frame"><img class="product__sky" src="assets/sky/bronze.jpg" width="2400" height="1500" alt="" loading="lazy"><img class="product__watch" src="assets/img/rel-388309.webp" width="834" height="963" alt="" loading="lazy"><span class="caps product__size">41 mm</span></span><span class="product__name">Pilot’s Watch Performance Chronograph 41</span><span class="product__meta">IW388309</span><span>CHF 26’900</span></a></li>
+      </ul>
+    </section>
+
+    <section class="care theme-dark" id="services" aria-labelledby="care-title">
+      <img class="care__photo" src="assets/bottom/service.webp" width="1600" height="1200" alt="" loading="lazy">
+      <h2 class="caps care__title" id="care-title">Care and services</h2>
+      <p class="lineup__row"><span class="big" data-count>8</span><span class="lineup__label">years of warranty. Register your watch with My IWC to extend the 2-year International Limited Warranty by 6 years.</span></p>
+      <ul class="care__list">
+        <li><h3>Complimentary delivery</h3><p>Within 3 to 5 business days, or ready for pick-up in a boutique.</p></li>
+        <li><h3>Book an appointment</h3><p>Try the watch on with a watch expert in an IWC boutique.</p></li>
+        <li><h3>Personalisation</h3><p>Engraving of a date or a name on the case back, for select models.</p></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__grid grid">
+      <div class="footer__section footer__section--logo">
+        <svg class="footer__logo" aria-label="IWC Schaffhausen"><use href="#logo-full"/></svg>
+      </div>
+      <div class="footer__section footer__section--newsletter">
+        <form class="footer__newsletter">
+          <label class="footer__newsletter-label" for="newsletter">Newsletter Sign Up <span aria-hidden="true">*</span></label>
+          <div class="footer__input">
+            <input id="newsletter" type="email" placeholder="Email Address" autocomplete="email">
+            <button type="submit" aria-label="Subscribe"><svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button>
+          </div>
+        </form>
+        <p class="footer__copyright">© IWC 2026 · Design concept</p>
+      </div>
+      <div class="footer__section footer__section--links">
+        <details><summary>Contact Information<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#services">Contact us</a></li><li><a href="#services">Find a boutique</a></li><li><a href="#services">Book an appointment</a></li></ul></details>
+        <details><summary>About IWC<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#collection">History</a></li><li><a href="#collection">Manufacture</a></li><li><a href="#collection">Sustainability</a></li></ul></details>
+        <details><summary>Watches and Accessories<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#collection">Pilot’s Watches</a></li><li><a href="#collection">Portugieser</a></li><li><a href="#straps">Straps</a></li></ul></details>
+        <details><summary>Customer Care<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#services">My IWC care</a></li><li><a href="#services">Service and repair</a></li><li><a href="#services">FAQs</a></li></ul></details>
+        <details><summary>Social Media<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#top">Instagram</a></li><li><a href="#top">YouTube</a></li><li><a href="#top">LinkedIn</a></li></ul></details>
+        <details><summary>Legal<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary><ul><li><a href="#top">Privacy policy</a></li><li><a href="#top">Cookie policy</a></li><li><a href="#top">Terms of sale</a></li></ul></details>
+      </div>
+    </div>
+  </footer>
+
+  <div class="buybar" aria-hidden="true">
+    <p class="buybar__price" data-bind="price">CHF 6’700</p>
+    <button class="btn btn--primary" type="button" data-add-to-bag tabindex="-1">Add to bag</button>
+  </div>
+</body>
+</html>

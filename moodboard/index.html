@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moodboard · Pilot’s Watch Chronograph 41 concept</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .board {
+      display: grid;
+      gap: var(--s12) var(--s3);
+      padding: var(--s12) var(--s3) var(--s16);
+    }
+
+    .board__head p {
+      max-width: 36rem;
+      margin-top: var(--s4);
+      color: var(--muted);
+    }
+
+    .ref {
+      display: grid;
+      align-content: start;
+      gap: var(--s4);
+      padding-top: var(--s3);
+      border-top: 1px solid var(--fg);
+    }
+
+    .ref img {
+      width: 100%;
+      border: 1px solid var(--outline);
+    }
+
+    .ref p {
+      max-width: 34rem;
+      color: var(--muted);
+    }
+
+    @media (min-width: 1024px) {
+      .board {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .board__head {
+        grid-column: 1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <header class="board__head">
+      <p class="caps">Moodboard · <a class="link" href="../index.html">Open the concept</a> · <a class="link" href="../v1/index.html">First version</a></p>
+      <h1 class="heading" style="margin-top: var(--s3)">Pilot’s Watch Chronograph 41</h1>
+      <p>A standard IWC product page with three creative moments, each built from IWC’s own material: the Watches and Wonders 2026 skies, the master packshots and the product photography.</p>
+    </header>
+
+    <figure class="ref">
+      <img src="iwc-ww-section.jpg" width="1440" height="900" alt="IWC Watches and Wonders 2026 page: watch centred on a navy sky with a band of light">
+      <figcaption>
+        <h2 class="heading">IWC · Watches and Wonders 2026</h2>
+        <p>“Engineered for the Next Space Age”, with IWC’s partner Vast. One watch centred on a navy sky, the name on the left, one paragraph on the right. The variations showroom uses the same layout.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="variations-skies.jpg" width="1440" height="180" alt="The Watches and Wonders sky recoloured for each dial">
+      <figcaption>
+        <h2 class="heading">One sky per dial</h2>
+        <p>IWC’s sky recoloured from its own light: navy for the blue dial, ice for the light blue rubber, forest for green, graphite for black, bronze for 5N gold. Sliding between watches blends the skies.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="vast-features-stack.jpg" width="1440" height="1800" alt="Vast Haven-1 features: full-width cards stacking on scroll">
+      <figcaption>
+        <h2 class="heading">Vast · Haven-1 Features</h2>
+        <p>A title pinned in the middle, then full-width cards rising and docking, each leaving a sliver of the previous one. The features section uses the same choreography.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="lume-shader.jpg" width="1440" height="291" alt="The front packshot relit at night with glowing hands and numerals">
+      <figcaption>
+        <h2 class="heading">Real packshots, relit</h2>
+        <p>The cards render IWC’s 3000 × 4000 master packshots through a shader: a reflection crosses the sapphire, highlights follow the steel, and on the dial card the lights go out so the hands and numerals glow.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="movement-drawing.jpg" width="808" height="710" alt="Exploded line drawing of the ETA 6498-1 movement under the case">
+      <figcaption>
+        <h2 class="heading">A real movement, drawn</h2>
+        <p>The Movement tab explodes a real CAD model: the ETA 6498-1 published on GrabCAD by Steen Winther, rendered as a technical drawing. It is a stand-in. In production, IWC’s own CAD of calibre 69385 would take its place.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="jlc-services.jpg" width="1440" height="900" alt="Jaeger-LeCoultre product page: Protect your watch, with two image cards and a reassurance strip">
+      <figcaption>
+        <h2 class="heading">Jaeger-LeCoultre · Product page</h2>
+        <p>The lower half of a JLC product page: editorial chapters, the selection, then two image cards for after-sales and warranty above a reassurance strip. The collection, heritage and services sections follow that order.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="ref">
+      <img src="iwc-current-pdp.jpg" width="720" height="1342" alt="Current IWC product page for IW388101">
+      <figcaption>
+        <h2 class="heading">IWC · Current product page</h2>
+        <p>Kept as the standard: header, footer, the split purchase area, specification tabs, services, square uppercase buttons and Helvetica Neue at IWC’s sizes.</p>
+      </figcaption>
+    </figure>
+  </main>
+</body>
+</html>
