@@ -20,6 +20,7 @@
     }
   </script>
   <script src="field.js" type="module"></script>
+  <script src="stage.js" type="module"></script>
   <script src="features.js" type="module"></script>
   <script src="drawing.js" type="module"></script>
 </head>
@@ -34,6 +35,9 @@
     <symbol fill="none" viewBox="0 0 24 24" id="arrow-right"><path stroke="currentColor" stroke-width="1.5" d="m14.827 8.624 3.425 3.426-3.425 3.425M5.748 12.05h12.504"/></symbol>
     <symbol fill="none" viewBox="0 0 24 24" id="menu"><path stroke="currentColor" stroke-width="1.5" d="M3 15.747h17m-17-8h17"/></symbol>
     <symbol viewBox="0 0 24 24" id="triangle-down"><path d="m12 15.875-6.2-7.75h12.4l-6.2 7.75Z"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="delivery"><path stroke="currentColor" stroke-width="1.5" d="M3.75 7.5 12 3.75l8.25 3.75v9L12 20.25 3.75 16.5zm0 0L12 11.25l8.25-3.75M12 11.25v9"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="warranty"><path stroke="currentColor" stroke-width="1.5" d="M12 3.25 4.75 6v5.5c0 4.35 3.05 7.95 7.25 9.25 4.2-1.3 7.25-4.9 7.25-9.25V6zm-3.25 9 2.25 2.25 4.25-4.5"/></symbol>
+    <symbol fill="none" viewBox="0 0 24 24" id="engraving"><path stroke="currentColor" stroke-width="1.5" d="m15.25 4.75 4 4L8.5 19.5H4.5v-4zm-2.5 2.5 4 4"/></symbol>
     <symbol fill="none" viewBox="0 0 24 24" id="arrow-left"><path stroke="currentColor" stroke-width="1.5" d="M9.18 15.475 5.755 12.05 9.18 8.624m9.072 3.426H5.748"/></symbol>
   </svg>
   <nav class="nav">
@@ -54,37 +58,96 @@
   </nav>
   <main id="top">
     <section class="buy" aria-labelledby="product-title">
-      <div class="buy__name">
-        <a class="caps link" href="#collection">Pilot’s Watches</a>
-        <h1 class="buy__title" id="product-title">Pilot’s Watch Chronograph 41</h1>
+      <div class="buy__stage">
+        <canvas class="buy__field" aria-hidden="true"></canvas>
+        <div class="buy__views">
+          <canvas class="buy__canvas" role="img"></canvas>
+        </div>
+        <div class="buy__scale" aria-hidden="true">
+          <span class="buy__hand"></span>
+          <span class="buy__stop is-current">Front</span>
+          <span class="buy__stop">Detail</span>
+          <span class="buy__stop">Profile</span>
+          <span class="buy__stop">Materials</span>
+          <span class="buy__stop">Case back</span>
+        </div>
       </div>
 
-      <div class="buy__aside">
-        <p class="buy__price"><span class="buy__amount" data-bind="price">CHF 6’700</span><span class="buy__vat">VAT included · <span data-bind="ref">IW388101</span></span></p>
-        <div class="buy__specs" id="details" data-lenis-prevent>
-          <details name="specs">
-            <summary>Overview<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+      <div class="buy__text">
+        <div class="buy__intro" data-view="1">
+          <a class="caps link" href="#collection">Pilot’s Watches</a>
+          <h1 class="buy__title" id="product-title">Pilot’s Watch Chronograph 41</h1>
+          <p class="buy__lead">The Pilot’s Watch Chronograph 41 wins you over with versatility and a sporty design.</p>
+          <div class="buy__variant">
+            <p data-bind="variant">Blue dial, blue calfskin</p>
+            <div class="swatches"></div>
+          </div>
+          <p class="buy__price"><span class="buy__amount" data-bind="price">CHF 6’700</span><span class="buy__vat">VAT included · <span data-bind="ref">IW388101</span></span></p>
+          <div class="buy__ctas">
+            <button class="btn btn--primary" type="button" data-add-to-bag>Add to bag</button>
+            <a class="btn btn--secondary" href="#services">Book an appointment</a>
+          </div>
+          <p class="buy__note">Complimentary delivery in 3 to 5 business days</p>
+        </div>
+
+        <details class="buy__chapter" data-view="3">
+          <summary><h2 class="caps">Overview</h2><svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+          <div class="buy__body">
+            <p class="buy__lead">With its cockpit instrument-inspired design, the Pilot’s Watch Chronograph is celebrated for its powerful durability and extreme versatility.</p>
             <dl class="rows">
               <div class="row"><dt>Reference</dt><dd data-bind="ref">IW388101</dd></div>
               <div class="row"><dt>Dial colour</dt><dd data-bind="dial">Blue</dd></div>
-              <div class="row"><dt>Case</dt><dd data-bind="case">Stainless steel</dd></div>
-              <div class="row"><dt>Strap</dt><dd data-bind="strap-name">Blue calfskin strap</dd></div>
               <div class="row"><dt>Diameter</dt><dd>41 mm</dd></div>
             </dl>
-          </details>
-          <details name="specs">
-            <summary>Case<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+            <ul class="buy__features">
+              <li>Chronograph function with hours, minutes and seconds</li>
+              <li>Small hacking seconds</li>
+              <li>Day and date display</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="buy__chapter" data-view="5">
+          <summary><h2 class="caps">Case</h2><svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+          <div class="buy__body">
             <dl class="rows">
               <div class="row"><dt>Height</dt><dd>14.5 mm</dd></div>
               <div class="row"><dt>Water resistance</dt><dd>10 bar</dd></div>
               <div class="row"><dt>Crown</dt><dd>Screwed-in</dd></div>
-              <div class="row"><dt>Case back</dt><dd>Sapphire crystal</dd></div>
+              <div class="row"><dt>Case back</dt><dd>With synthetic sapphire crystal</dd></div>
               <div class="row"><dt>Strap width</dt><dd>20 mm</dd></div>
               <div class="row"><dt>Buckle width</dt><dd>18 mm</dd></div>
             </dl>
-          </details>
-          <details name="specs">
-            <summary>Movement<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+          </div>
+        </details>
+
+        <details class="buy__chapter" data-view="shape">
+          <summary><h2 class="caps">Materials</h2><svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+          <div class="buy__body">
+            <ul class="materials">
+              <li class="material is-current">
+                <p class="caps">Case</p>
+                <h3 class="material__name" data-bind="case">Stainless steel</h3>
+                <p class="material__text" data-bind="case-text">Stainless steel is robust and durable. The material is also highly resistant to corrosion and thus unaffected by sweat, moisture and seawater splashes.</p>
+              </li>
+              <li class="material">
+                <p class="caps">Glass</p>
+                <h3 class="material__name">Sapphire glass</h3>
+                <p class="material__text">With a hardness of 9 on Mohs’ scale, it is harder than any other type of glass and topped only by diamond. The antireflective coating reduces glare and gives the wearer a crystal-clear view of the dial.</p>
+              </li>
+              <li class="material">
+                <p class="caps">Strap</p>
+                <h3 class="material__name" data-bind="strap-name">Blue calfskin strap</h3>
+                <p class="material__text" data-bind="strap-text">Leather impresses with a timeless and stylish look and complements all outfits and occasions. It is strong and, at the same time, breathable and supple.</p>
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="buy__chapter" data-view="2">
+          <summary><h2 class="caps">Movement</h2><svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
+          <div class="buy__body">
+            <p class="buy__lead">Clear sapphire case display on the back to witness the complete movement.</p>
             <dl class="rows">
               <div class="row"><dt>Calibre</dt><dd>69385</dd></div>
               <div class="row"><dt>Type</dt><dd>Automatic, self-winding</dd></div>
@@ -94,37 +157,9 @@
               <div class="row"><dt>Components</dt><dd>242</dd></div>
               <div class="row"><dt>Jewels</dt><dd>33</dd></div>
             </dl>
-          </details>
-          <details name="specs">
-            <summary>Features<svg class="icon" aria-hidden="true"><use href="#triangle-down"/></svg></summary>
-            <ul class="buy__features">
-              <li>Chronograph function with hours, minutes and seconds</li>
-              <li>Small hacking seconds</li>
-              <li>Day and date display</li>
-              <li>Sapphire glass, convex, antireflective coating on both sides</li>
-              <li>Glass secured against displacement by drop in air pressure</li>
-              <li>IWC EasX-CHANGE® system</li>
-            </ul>
-          </details>
-          <a class="caps link buy__manual" href="#details">User manual</a>
-        </div>
-      </div>
-
-      <div class="buy__stage">
-        <canvas class="buy__field" aria-hidden="true"></canvas>
-        <div class="buy__views"></div>
-        <ol class="buy__thumbs" aria-label="Views"></ol>
-      </div>
-
-      <div class="buy__variants">
-        <p class="picker__label"><span class="caps">Variants</span><span data-bind="variant">Blue dial, blue calfskin</span></p>
-        <div class="variants" role="radiogroup" aria-label="Variants"></div>
-      </div>
-
-      <div class="buy__ctas">
-        <button class="btn btn--primary" type="button" data-add-to-bag>Add to bag</button>
-        <a class="btn btn--secondary" href="#services">Book an appointment</a>
-        <p class="buy__note">Complimentary delivery in 3 to 5 business days</p>
+            <a class="caps link" href="#top">User manual</a>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -177,36 +212,12 @@
       </ol>
     </section>
 
-    <section class="showroom theme-dark" aria-labelledby="showroom-title" tabindex="-1">
-      <div class="showroom__skies" aria-hidden="true"></div>
-      <div class="showroom__track" aria-hidden="true"></div>
-      <div class="showroom__ui">
-        <div class="showroom__head">
-          <h2 class="caps" id="showroom-title">Variations</h2>
-          <p class="caps showroom__count"><span data-showroom="index">01</span> / <span data-showroom="total">08</span></p>
-        </div>
-        <div class="showroom__name" aria-live="polite">
-          <p class="showroom__dial" data-showroom="dial">Blue dial</p>
-          <p class="showroom__strap" data-showroom="strap">Stainless steel case, blue calfskin strap</p>
-        </div>
-        <div class="showroom__meta">
-          <p class="caps" data-showroom="ref">IW388101</p>
-          <p data-showroom="price">CHF 6’700</p>
-          <button class="btn btn--secondary showroom__select" type="button" data-showroom-select>Select</button>
-        </div>
-        <div class="showroom__nav">
-          <button class="round" type="button" data-showroom-step="-1" aria-label="Previous"><svg class="icon" aria-hidden="true"><use href="#arrow-left"/></svg></button>
-          <button class="round" type="button" data-showroom-step="1" aria-label="Next"><svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button>
-        </div>
-      </div>
-    </section>
-
     <section class="straps" id="straps" aria-labelledby="straps-title">
       <div class="straps__intro">
-        <p class="caps">EasX-CHANGE®</p>
-        <h2 id="straps-title">Change the strap in seconds</h2>
+        <h2 class="caps" id="straps-title">EasX-CHANGE®</h2>
+        <h3 class="straps__name" aria-live="polite" data-strap="name">Blue calfskin</h3>
         <p class="straps__text">Press the button on the underside of the strap to release it, then click in the next one. No tools needed.</p>
-        <p class="straps__links"><a class="caps link" href="#straps">Find your strap</a><span>Straps are sold without buckle.</span></p>
+        <a class="caps link" href="#straps">Find your strap</a>
       </div>
       <div class="straps__stage">
         <div class="straps__rail" aria-hidden="true"></div>
@@ -214,8 +225,8 @@
       </div>
       <div class="straps__controls">
         <button class="round" type="button" data-strap-step="-1" aria-label="Previous strap"><svg class="icon" aria-hidden="true"><use href="#arrow-left"/></svg></button>
-        <p class="straps__name" aria-live="polite"><span data-strap="name">Blue calfskin</span><span class="straps__count" data-strap="index">03 / 06</span></p>
         <button class="round" type="button" data-strap-step="1" aria-label="Next strap"><svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg></button>
+        <p class="caps straps__count" data-strap="index">03 / 06</p>
       </div>
     </section>
 
@@ -265,27 +276,22 @@
         <div class="sheet__row">
           <figure class="sheet__cell sheet__cell--8">
             <div class="sheet__media sheet__media--shirt"><img src="assets/wrist/shirt.webp" width="1600" height="1340" alt="The watch on the wrist, worn with a navy linen shirt" loading="lazy"></div>
-            <figcaption class="sheet__caption"><span class="caps">01</span><span>On the wrist, with the stainless steel bracelet</span><span class="caps">IW388102</span></figcaption>
           </figure>
           <div class="sheet__cell sheet__cell--4 sheet__stack">
             <figure class="sheet__fill">
               <div class="sheet__media"><video src="assets/video/case.mp4" poster="assets/video/case.jpg" width="1280" height="720" muted playsinline preload="none" aria-hidden="true"></video></div>
-              <figcaption class="sheet__caption"><span class="caps">02</span><span>Pusher and screw-in crown</span><span class="caps">Case</span></figcaption>
             </figure>
             <figure class="sheet__fill">
               <div class="sheet__media"><img src="assets/video/movement.jpg" width="1280" height="720" alt="The movement seen through the sapphire case back" loading="lazy"></div>
-              <figcaption class="sheet__caption"><span class="caps">03</span><span>Calibre 69385 through the sapphire case back</span><span class="caps">Movement</span></figcaption>
             </figure>
           </div>
         </div>
         <div class="sheet__row">
           <figure class="sheet__cell sheet__cell--4 sheet__fill">
             <div class="sheet__media"><img src="assets/video/lume.jpg" width="1600" height="900" alt="The hands and numerals glowing in the dark" loading="lazy"></div>
-            <figcaption class="sheet__caption"><span class="caps">04</span><span>Luminescent hands and numerals</span><span class="caps">Lume</span></figcaption>
           </figure>
           <figure class="sheet__cell sheet__cell--8">
             <div class="sheet__media sheet__media--close"><img src="assets/wrist/close.webp" width="1600" height="980" alt="Close-up of the blue dial on the wrist" loading="lazy"></div>
-            <figcaption class="sheet__caption"><span class="caps">05</span><span>Blue dial, modelled on cockpit instruments</span><span class="caps">Dial</span></figcaption>
           </figure>
         </div>
       </div>
@@ -301,16 +307,91 @@
       </ul>
     </section>
 
-    <section class="care theme-dark" id="services" aria-labelledby="care-title">
-      <img class="care__photo" src="assets/bottom/service.webp" width="1600" height="1200" alt="" loading="lazy">
-      <h2 class="caps care__title" id="care-title">Care and services</h2>
-      <p class="lineup__row"><span class="big" data-count>8</span><span class="lineup__label">years of warranty. Register your watch with My IWC to extend the 2-year International Limited Warranty by 6 years.</span></p>
-      <ul class="care__list">
-        <li><h3>Complimentary delivery</h3><p>Within 3 to 5 business days, or ready for pick-up in a boutique.</p></li>
-        <li><h3>Book an appointment</h3><p>Try the watch on with a watch expert in an IWC boutique.</p></li>
-        <li><h3>Personalisation</h3><p>Engraving of a date or a name on the case back, for select models.</p></li>
+    <section class="collections" aria-labelledby="collections-title">
+      <div class="collections__pin">
+        <div class="collections__head">
+          <h2 class="caps" id="collections-title">Collections</h2>
+          <p class="caps collections__count"><span data-collection-index>01</span> / 05</p>
+        </div>
+        <p class="big collections__year" aria-hidden="true">1936</p>
+        <div class="collections__watches" aria-hidden="true">
+          <img class="is-current" src="assets/collections/pilot.webp" width="1297" height="1498" alt="" loading="lazy">
+          <img src="assets/collections/portugieser.webp" width="1297" height="1498" alt="" loading="lazy">
+          <img src="assets/collections/ingenieur.webp" width="1297" height="1498" alt="" loading="lazy">
+          <img src="assets/collections/aquatimer.webp" width="1297" height="1498" alt="" loading="lazy">
+          <img src="assets/collections/portofino.webp" width="1297" height="1498" alt="" loading="lazy">
+        </div>
+        <ol class="collections__list">
+          <li class="collection crossfade is-current" data-year="1936">
+            <p class="caps">Since 1936</p>
+            <h3 class="collection__name">Pilot’s Watches</h3>
+            <p class="collection__text">Conceived as navigation instruments for aviators, IWC Pilot’s Watches are the quintessential tool for modern-day explorers.</p>
+            <a class="caps link" href="https://www.iwc.com/ch-en/watches/pilot-watches">Discover the collection</a>
+          </li>
+          <li class="collection crossfade" data-year="1939">
+            <p class="caps">Since 1939</p>
+            <h3 class="collection__name">Portugieser</h3>
+            <p class="collection__text">Inspired by a nautical instrument, the Portugieser has evolved into a timeless yet dynamic paragon of understated elegance.</p>
+            <a class="caps link" href="https://www.iwc.com/ch-en/watches/portugieser">Discover the collection</a>
+          </li>
+          <li class="collection crossfade" data-year="1955">
+            <p class="caps">Since 1955</p>
+            <h3 class="collection__name">Ingenieur</h3>
+            <p class="collection__text">Based on Gérald Genta’s original design, the modern Ingenieur features the ergonomics and finishing of a versatile luxury sports watch for the 21st century.</p>
+            <a class="caps link" href="https://www.iwc.com/ch-en/watches/ingenieur">Discover the collection</a>
+          </li>
+          <li class="collection crossfade" data-year="1967">
+            <p class="caps">Since 1967</p>
+            <h3 class="collection__name">Aquatimer</h3>
+            <p class="collection__text">High water resistance and safety features make the Aquatimer a reliable instrument for diving. Thanks to its robust build and sporty design, it is also suitable for adventures on land.</p>
+            <a class="caps link" href="https://www.iwc.com/ch-en/watches/aquatimer">Discover the collection</a>
+          </li>
+          <li class="collection crossfade" data-year="1984">
+            <p class="caps">Since 1984</p>
+            <h3 class="collection__name">Portofino</h3>
+            <p class="collection__text">Notable for its freshness and purity, the Portofino can easily be paired with a casual or elegant outfit. It is the perfect understated wristwatch for everyday wear.</p>
+            <a class="caps link" href="https://www.iwc.com/ch-en/watches/portofino">Discover the collection</a>
+          </li>
+        </ol>
+        <div class="collections__scale" aria-hidden="true">
+          <span class="collections__hand"></span>
+          <span class="collections__label" style="--year: 1930">1930</span>
+          <span class="collections__label" style="--year: 1940">1940</span>
+          <span class="collections__label" style="--year: 1950">1950</span>
+          <span class="collections__label" style="--year: 1960">1960</span>
+          <span class="collections__label" style="--year: 1970">1970</span>
+          <span class="collections__label" style="--year: 1980">1980</span>
+          <span class="collections__label" style="--year: 1990">1990</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services" aria-labelledby="services-title">
+      <h2 class="caps" id="services-title">Services</h2>
+      <ul class="services__list">
+        <li class="service">
+          <svg class="icon" aria-hidden="true"><use href="#delivery"/></svg>
+          <h3>Complimentary standard delivery</h3>
+          <p>All orders come with complimentary standard delivery. Watches or accessories will be shipped to your home or professional address within 3 to 5 business days.</p>
+        </li>
+        <li class="service">
+          <svg class="icon" aria-hidden="true"><use href="#warranty"/></svg>
+          <h3>Up to 8 years of warranty</h3>
+          <p>We offer a complimentary 6-year extension to our standard 2-year International Limited Warranty, bringing the total coverage to 8 years.</p>
+        </li>
+        <li class="service">
+          <svg class="icon" aria-hidden="true"><use href="#engraving"/></svg>
+          <h3>Personalisation options</h3>
+          <p>For select models, we offer engraving services to add a specific date or name on the case back.</p>
+        </li>
+        <li class="service">
+          <svg class="icon" aria-hidden="true"><use href="#phone"/></svg>
+          <h3>Watch expert personal shopping</h3>
+          <p>For orders placed by telephone, our concierge shopping service is available to help you find the perfect watch.</p>
+        </li>
       </ul>
     </section>
+
   </main>
 
   <footer class="footer">

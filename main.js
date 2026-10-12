@@ -22,221 +22,111 @@ if (reduceMotion) {
 }
 
 const variants = [
-  { id: '388101', dial: 'Blue', case: 'Stainless steel', strapName: 'Blue calfskin strap', fastening: 'Buckle', price: 6700, sky: 'blue', head: '388101', strap: '388101' },
-  { id: '388102', dial: 'Blue', case: 'Stainless steel', strapName: 'Stainless steel bracelet', fastening: 'Clasp', price: 7700, sky: 'blue', head: '388101', strap: '388102' },
-  { id: '388117', dial: 'Blue', case: 'Stainless steel', strapName: 'Light blue rubber strap', fastening: 'Buckle', price: 6700, sky: 'ice', head: '388117', strap: '388117' },
-  { id: '388103', dial: 'Green', case: 'Stainless steel', strapName: 'Brown calfskin strap', fastening: 'Buckle', price: 6700, sky: 'green', head: '388103', strap: '388103' },
-  { id: '388104', dial: 'Green', case: 'Stainless steel', strapName: 'Stainless steel bracelet', fastening: 'Clasp', price: 7700, sky: 'green', head: '388103', strap: '388102' },
-  { id: '388110', dial: 'Green', case: '18 ct 5N gold', strapName: 'Green rubber strap', fastening: 'Buckle', price: 23400, sky: 'bronze', head: '388110', strap: '388110' },
-  { id: '388111', dial: 'Black', case: 'Stainless steel', strapName: 'Black calfskin strap', fastening: 'Buckle', price: 6700, sky: 'graphite', head: '388111', strap: '388111' },
-  { id: '388113', dial: 'Black', case: 'Stainless steel', strapName: 'Stainless steel bracelet', fastening: 'Clasp', price: 7700, sky: 'graphite', head: '388111', strap: '388102' },
+  { id: '388101', dial: 'Blue', case: 'Stainless steel', strapName: 'Blue calfskin strap', price: 6700, sky: 'blue', head: '388101', strap: '388101' },
+  { id: '388102', dial: 'Blue', case: 'Stainless steel', strapName: 'Stainless steel bracelet', price: 7700, sky: 'blue', head: '388101', strap: '388102' },
+  { id: '388117', dial: 'Blue', case: 'Stainless steel', strapName: 'Light blue rubber strap', price: 6700, sky: 'ice', head: '388117', strap: '388117' },
+  { id: '388103', dial: 'Green', case: 'Stainless steel', strapName: 'Brown calfskin strap', price: 6700, sky: 'green', head: '388103', strap: '388103' },
+  { id: '388104', dial: 'Green', case: 'Stainless steel', strapName: 'Stainless steel bracelet', price: 7700, sky: 'green', head: '388103', strap: '388102' },
+  { id: '388110', dial: 'Green', case: '18 ct 5N gold', strapName: 'Green rubber strap', price: 23400, sky: 'bronze', head: '388110', strap: '388110' },
+  { id: '388111', dial: 'Black', case: 'Stainless steel', strapName: 'Black calfskin strap', price: 6700, sky: 'graphite', head: '388111', strap: '388111' },
+  { id: '388113', dial: 'Black', case: 'Stainless steel', strapName: 'Stainless steel bracelet', price: 7700, sky: 'graphite', head: '388111', strap: '388102' },
 ];
+
+const leather = 'Leather impresses with a timeless and stylish look and complements all outfits and occasions. It is strong and, at the same time, breathable and supple.';
+const rubber = 'Rubber is a highly versatile material and ideally suited for watch straps. It is durable, flexible and completely waterproof.';
 
 const straps = [
-  { id: '388103', name: 'Brown calfskin' },
-  { id: '388111', name: 'Black calfskin' },
-  { id: '388101', name: 'Blue calfskin' },
-  { id: '388117', name: 'Light blue rubber' },
-  { id: '388110', name: 'Green rubber' },
-  { id: '388102', name: 'Steel bracelet' },
+  { id: '388103', name: 'Brown calfskin', text: leather },
+  { id: '388111', name: 'Black calfskin', text: leather },
+  { id: '388101', name: 'Blue calfskin', text: leather },
+  { id: '388117', name: 'Light blue rubber', text: rubber },
+  { id: '388110', name: 'Green rubber', text: rubber },
+  { id: '388102', name: 'Steel bracelet', text: 'The Pilot’s Watch Chronograph 41 features a 5-link metal bracelet with EasX-CHANGE® system. All metal bracelets can easily be adjusted in length.' },
 ];
 
-const viewNames = ['Front', 'Case back', 'Detail', 'Buckle', 'Profile'];
-const viewName = (index) => (index === 3 ? current.fastening : viewNames[index]);
+const caseTexts = {
+  'Stainless steel': 'Stainless steel is robust and durable. The material is also highly resistant to corrosion and thus unaffected by sweat, moisture and seawater splashes.',
+  '18 ct 5N gold': 'The pure gold content of an IWC watch case is 75 per cent, which is equivalent to 18 carats.',
+};
+
 const price = (value) => `CHF ${value.toLocaleString('de-CH')}`;
 const lowerFirst = (text) => text.charAt(0).toLowerCase() + text.slice(1);
 const versionLabel = (variant) => (variant.case === 'Stainless steel' ? variant.strapName : `${variant.case}, ${lowerFirst(variant.strapName)}`).replace(' strap', '').replace('Stainless steel bracelet', 'Steel bracelet');
 const variantName = (variant) => `${variant.dial} dial, ${lowerFirst(versionLabel(variant))}`;
-const describe = (variant) => (variant.strapName === 'Stainless steel bracelet' ? 'Stainless steel case and bracelet' : `${variant.case} case, ${lowerFirst(variant.strapName)}`);
 
 let current = variants[0];
 
-function crossfade(container, src, className, alt) {
-  const next = new Image();
-  next.className = className;
-  next.src = src;
-  next.alt = alt;
-  const previous = [...container.children];
-  container.append(next);
-  next.decode().then(() => {
-    next.classList.add('is-active');
-    for (const element of previous) {
-      element.classList.remove('is-active');
-      setTimeout(() => element.remove(), 600);
-    }
-  });
-}
-
 /* Purchase */
 
-const views = document.querySelector('.buy__views');
-const thumbs = document.querySelector('.buy__thumbs');
-const variantPicker = document.querySelector('.variants');
-let view = 1;
-
-function showView(next) {
-  view = next;
-  crossfade(views, `assets/gallery/${current.id}-${view}.webp`, 'buy__view', `Pilot’s Watch Chronograph 41 IW${current.id}, ${viewName(view - 1).toLowerCase()}`);
-  for (const [index, button] of [...thumbs.querySelectorAll('.thumb')].entries()) {
-    button.setAttribute('aria-pressed', String(index + 1 === view));
-  }
-}
-
+const desktop = matchMedia('(min-width: 1024px)');
 const stage = document.querySelector('.buy__stage');
+const scale = stage.querySelector('.buy__scale');
+const stops = [...scale.querySelectorAll('.buy__stop')];
+const chapters = [...document.querySelectorAll('.buy [data-view]')];
+let chapter = 0;
 let swipe = null;
 
+function showChapter(index, progress, direction) {
+  scale.style.setProperty('--progress', progress / (chapters.length - 1));
+  if (index === chapter) return;
+  document.dispatchEvent(new CustomEvent('view', { detail: { view: chapters[index].dataset.view, direction } }));
+  chapter = index;
+  stops.forEach((stop, i) => stop.classList.toggle('is-current', i === index));
+}
+
+function updateChapter() {
+  if (!desktop.matches) return;
+  const line = innerHeight / 2;
+  const reached = chapters.map((element) => Math.max(element.getBoundingClientRect().top + scrollY - line, 0));
+  let index = 0;
+  while (index < reached.length - 1 && reached[index + 1] <= scrollY) index++;
+  const progress = index < reached.length - 1 ? index + (scrollY - reached[index]) / (reached[index + 1] - reached[index]) : index;
+  showChapter(index, progress, Math.sign(index - chapter));
+}
+
+lenis.on('scroll', updateChapter);
+
 stage.addEventListener('pointerdown', (event) => {
-  if (event.pointerType !== 'mouse') swipe = { x: event.clientX, y: event.clientY };
+  if (event.pointerType !== 'mouse' && !desktop.matches) swipe = { x: event.clientX, y: event.clientY };
 });
 
 stage.addEventListener('pointerup', (event) => {
   if (!swipe) return;
   const distance = event.clientX - swipe.x;
   if (Math.abs(distance) > 40 && Math.abs(distance) > Math.abs(event.clientY - swipe.y)) {
-    showView(((view - 1 - Math.sign(distance) + viewNames.length) % viewNames.length) + 1);
+    const index = (chapter - Math.sign(distance) + chapters.length) % chapters.length;
+    showChapter(index, index, -Math.sign(distance));
   }
   swipe = null;
 });
 
 stage.addEventListener('pointercancel', () => (swipe = null));
 
-function renderThumbs() {
-  thumbs.replaceChildren(
-    ...viewNames.map((_, index) => {
-      const item = document.createElement('li');
-      item.innerHTML = `<button class="thumb" type="button" aria-label="${viewName(index)}" aria-pressed="${index + 1 === view}"><img src="assets/img/${current.id}-${index + 1}.webp" width="1297" height="1498" alt=""></button>`;
-      item.firstChild.addEventListener('click', () => showView(index + 1));
-      return item;
-    }),
-  );
-}
+/* Swatches */
 
-variantPicker.replaceChildren(
-  ...variants.map((variant) => {
-    const button = document.createElement('button');
-    button.className = 'variant';
-    button.type = 'button';
-    button.role = 'radio';
-    button.ariaLabel = `${variantName(variant)}, ${price(variant.price)}`;
-    button.innerHTML = `<img src="assets/img/${variant.id}-1.webp" width="1297" height="1498" alt="">`;
-    button.addEventListener('click', () => selectVariant(variant));
-    return button;
-  }),
-);
+const swatchList = document.querySelector('.swatches');
 
-/* Showroom */
-
-const showroom = document.querySelector('.showroom');
-const skyLayer = showroom.querySelector('.showroom__skies');
-const track = showroom.querySelector('.showroom__track');
-const showroomText = Object.fromEntries([...showroom.querySelectorAll('[data-showroom]')].map((element) => [element.dataset.showroom, element]));
-const selectButton = showroom.querySelector('[data-showroom-select]');
-const count = variants.length;
-const wrap = (value) => ((value % count) + count) % count;
-const slide = { position: 0, target: 0 };
-let shown = -1;
-let drag = null;
-
-const skies = Object.fromEntries(
-  ['blue', 'ice', 'green', 'bronze', 'graphite'].map((name) => {
-    const image = new Image();
-    image.className = 'showroom__sky';
-    image.src = `assets/sky/${name}.jpg`;
-    image.alt = '';
-    skyLayer.append(image);
-    return [name, image];
-  }),
-);
-
-const items = variants.map((variant) => {
-  const image = new Image();
-  image.className = 'showroom__item';
-  image.src = `assets/img/${variant.id}-1.webp`;
-  image.alt = '';
-  image.draggable = false;
-  track.append(image);
-  return image;
+const swatches = variants.map((variant) => {
+  const button = document.createElement('button');
+  button.className = 'swatch';
+  button.type = 'button';
+  button.ariaLabel = variantName(variant);
+  button.innerHTML = `<img src="assets/thumbs/${variant.id}-1.webp" width="160" height="185" alt="">`;
+  button.addEventListener('click', () => selectVariant(variant));
+  swatchList.append(button);
+  return button;
 });
 
-showroomText.total.textContent = String(count).padStart(2, '0');
-
-const spacing = () => (innerWidth < 768 ? innerWidth * 0.74 : Math.min(innerWidth * 0.34, 560));
-
-function renderShowroom() {
-  const gap = spacing();
-  const weights = {};
-  items.forEach((item, index) => {
-    const offset = wrap(index - slide.position + count / 2) - count / 2;
-    const distance = Math.abs(offset);
-    item.style.transform = `translate(-50%, -50%) translateX(${offset * gap}px) scale(${1 - Math.min(distance, 1) * 0.42})`;
-    item.style.opacity = String(Math.max(0, 1 - distance * 0.6));
-    item.style.filter = `blur(${Math.min(distance, 1.5) * 3}px)`;
-    weights[variants[index].sky] = (weights[variants[index].sky] ?? 0) + Math.max(0, 1 - distance);
-  });
-  for (const [name, image] of Object.entries(skies)) image.style.opacity = String(weights[name] ?? 0);
-
-  const index = wrap(Math.round(slide.position));
-  if (index === shown) return;
-  shown = index;
-  const variant = variants[index];
-  showroomText.index.textContent = String(index + 1).padStart(2, '0');
-  showroomText.dial.textContent = `${variant.dial} dial`;
-  showroomText.strap.textContent = describe(variant);
-  showroomText.ref.textContent = `IW${variant.id}`;
-  showroomText.price.textContent = price(variant.price);
-  selectButton.ariaPressed = String(variant === current);
-  selectButton.textContent = variant === current ? 'Selected' : 'Select';
-}
-
-function goTo(target) {
-  slide.target = target;
-  gsap.to(slide, { position: target, duration: reduceMotion ? 0 : 1.1, ease: 'expo.out', onUpdate: renderShowroom });
-}
-
-showroom.addEventListener('pointerdown', (event) => {
-  if (event.target.closest('button')) return;
-  gsap.killTweensOf(slide);
-  drag = { x: event.clientX, position: slide.position, lastX: event.clientX, lastTime: performance.now(), velocity: 0 };
-  showroom.setPointerCapture(event.pointerId);
-  showroom.classList.add('is-dragging');
+const more = document.createElement('button');
+more.className = 'swatch swatch--more';
+more.type = 'button';
+more.ariaLabel = 'Show all variants';
+more.textContent = `+${variants.length - 3}`;
+more.addEventListener('click', () => {
+  swatchList.classList.add('is-open');
+  swatches[3].focus();
 });
-
-showroom.addEventListener('pointermove', (event) => {
-  if (!drag) return;
-  const now = performance.now();
-  drag.velocity = (event.clientX - drag.lastX) / Math.max(now - drag.lastTime, 1);
-  drag.lastX = event.clientX;
-  drag.lastTime = now;
-  slide.position = drag.position - (event.clientX - drag.x) / spacing();
-  renderShowroom();
-});
-
-function release() {
-  if (!drag) return;
-  const target = Math.round(slide.position - (drag.velocity * 180) / spacing());
-  drag = null;
-  showroom.classList.remove('is-dragging');
-  goTo(target);
-}
-
-showroom.addEventListener('pointerup', release);
-showroom.addEventListener('pointercancel', release);
-
-for (const button of showroom.querySelectorAll('[data-showroom-step]')) {
-  button.addEventListener('click', () => goTo(slide.target + Number(button.dataset.showroomStep)));
-}
-
-showroom.addEventListener('keydown', (event) => {
-  if (event.key === 'ArrowLeft') goTo(slide.target - 1);
-  if (event.key === 'ArrowRight') goTo(slide.target + 1);
-});
-
-selectButton.addEventListener('click', () => {
-  selectVariant(variants[wrap(slide.target)]);
-  lenis.scrollTo(0, { duration: 1.4 });
-});
-
-addEventListener('resize', renderShowroom);
+swatches[2].after(more);
 
 /* Straps */
 
@@ -261,14 +151,14 @@ for (const button of document.querySelectorAll('[data-strap-step]')) {
   button.addEventListener('click', () => fitStrap(Math.round(strapRail.position) + Number(button.dataset.strapStep)));
 }
 
-const strapSpacing = () => strapCase.offsetWidth * 0.62;
+const strapSpacing = () => (desktop.matches ? strapCase.offsetWidth * 0.6 : strapStage.offsetWidth / 2);
 
 function renderStraps() {
   const gap = strapSpacing();
   strapItems.forEach((item, index) => {
     const offset = index - strapRail.position;
     item.style.transform = `translateX(${offset * gap}px)`;
-    item.style.opacity = String(1 - Math.min(Math.abs(offset), 1) * 0.45);
+    item.style.opacity = String(desktop.matches ? 1 : 1 - Math.min(Math.abs(offset), 1) * 0.45);
   });
   const index = Math.min(Math.max(Math.round(strapRail.position), 0), straps.length - 1);
   strapText.name.textContent = straps[index].name;
@@ -309,7 +199,7 @@ strapStage.addEventListener('pointermove', (event) => {
 
 function releaseStrap(event) {
   if (!strapDrag) return;
-  const box = strapStage.getBoundingClientRect();
+  const box = strapCase.getBoundingClientRect();
   const target = strapDrag.moved ? strapRail.position : strapRail.position + (event.clientX - box.left - box.width / 2) / strapSpacing();
   strapDrag = null;
   fitStrap(Math.round(target));
@@ -392,6 +282,38 @@ if (reduceMotion) {
   renderSheet();
 }
 
+/* Collections */
+
+const collections = document.querySelector('.collections');
+const collectionPin = collections.querySelector('.collections__pin');
+const collectionItems = [...collections.querySelectorAll('.collection')];
+const collectionWatches = [...collections.querySelectorAll('.collections__watches img')];
+const collectionYears = collectionItems.map((item) => Number(item.dataset.year));
+const collectionIndex = collections.querySelector('[data-collection-index]');
+const yearElement = collections.querySelector('.collections__year');
+yearElement.innerHTML = [...yearElement.textContent].map((char) => `<span class="reel${char === '1' ? ' kern' : ''}"><span class="reel__digits">${[...'0123456789'].map((digit) => `<span>${digit}</span>`).join('')}</span></span>`).join('');
+const yearDigits = [...yearElement.querySelectorAll('.reel__digits')];
+let shownCollection = -1;
+
+function renderCollections() {
+  const box = collections.getBoundingClientRect();
+  const pinned = (parseFloat(getComputedStyle(collectionPin).top) - box.top) / (box.height - collectionPin.offsetHeight);
+  const progress = Math.min(Math.max(pinned, 0), 1) * (collectionYears.length - 1);
+  const index = Math.min(Math.floor(progress), collectionYears.length - 2);
+  const move = Math.min(Math.max((progress - index - 0.25) / 0.5, 0), 1);
+  collections.style.setProperty('--hand', collectionYears[index] + (collectionYears[index + 1] - collectionYears[index]) * move * move * (3 - 2 * move));
+  const active = index + Math.round(move);
+  if (active === shownCollection) return;
+  shownCollection = active;
+  collectionItems.forEach((item, i) => item.classList.toggle('is-current', i === active));
+  collectionWatches.forEach((image, i) => image.classList.toggle('is-current', i === active));
+  collectionIndex.textContent = String(active + 1).padStart(2, '0');
+  [...String(collectionYears[active])].forEach((digit, i) => yearDigits[i].style.setProperty('--digit', digit));
+}
+
+lenis.on('scroll', renderCollections);
+renderCollections();
+
 /* Selection */
 
 function selectVariant(variant) {
@@ -402,16 +324,11 @@ function selectVariant(variant) {
   for (const element of document.querySelectorAll('[data-bind="dial"]')) element.textContent = variant.dial;
   for (const element of document.querySelectorAll('[data-bind="case"]')) element.textContent = variant.case;
   for (const element of document.querySelectorAll('[data-bind="strap-name"]')) element.textContent = variant.strapName;
+  for (const element of document.querySelectorAll('[data-bind="case-text"]')) element.textContent = caseTexts[variant.case];
+  for (const element of document.querySelectorAll('[data-bind="strap-text"]')) element.textContent = straps.find((strap) => strap.id === variant.strap).text;
   document.title = `Pilot’s Watch Chronograph 41 - IW${variant.id} | IWC Schaffhausen`;
 
-  showView(view);
-  renderThumbs();
-  for (const [index, button] of [...variantPicker.children].entries()) button.ariaChecked = String(variants[index] === variant);
-
-  const index = variants.indexOf(variant);
-  slide.position = slide.target = slide.target + (wrap(index - slide.target + count / 2) - count / 2);
-  shown = -1;
-  renderShowroom();
+  swatches.forEach((swatch, i) => (swatch.ariaPressed = String(variants[i] === variant)));
 
   strapCase.src = `assets/straps/head-${variant.head}.webp`;
   fitStrap(straps.findIndex((strap) => strap.id === variant.strap));
@@ -421,10 +338,6 @@ function selectVariant(variant) {
 strapRail.position = straps.findIndex((strap) => strap.id === current.strap);
 renderStraps();
 selectVariant(current);
-
-/* Landing */
-
-if (!reduceMotion) views.querySelector('.buy__view').decode().then(() => gsap.from(views, { opacity: 0, filter: 'blur(8px)', duration: 1.4, ease: 'power2.out', clearProps: 'opacity,filter' }));
 
 /* Bag */
 

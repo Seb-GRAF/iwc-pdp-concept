@@ -1,5 +1,4 @@
-const fieldArea = document.querySelector('.buy');
-const fieldGallery = fieldArea.querySelector('.buy__stage');
+const fieldGallery = document.querySelector('.buy__stage');
 const fieldCanvas = fieldGallery.querySelector('.buy__field');
 const fieldViews = fieldGallery.querySelector('.buy__views');
 const field = fieldCanvas.getContext('2d');
@@ -13,6 +12,8 @@ let fieldWidth = 0;
 let fieldHeight = 0;
 let fieldRatio = 1;
 let fieldFrame = 0;
+let originX = 0;
+let originY = 0;
 let landedAt = reduceMotion ? -Infinity : Infinity;
 
 function layoutField() {
@@ -27,14 +28,14 @@ function layoutField() {
   const frame = fieldGallery.getBoundingClientRect();
   const imageHeight = Math.min(box.height, (box.width * 1498) / 1297);
   const imageWidth = (imageHeight * 1297) / 1498;
-  const centerX = box.left - frame.left + (box.width - imageWidth) / 2 + imageWidth * 0.5092;
-  const centerY = box.top - frame.top + (box.height - imageHeight) / 2 + imageHeight * 0.4995;
-  const reach = Math.hypot(Math.max(centerX, fieldWidth - centerX), Math.max(centerY, fieldHeight - centerY));
+  originX = box.left - frame.left + (box.width - imageWidth) / 2 + imageWidth * 0.5092;
+  originY = box.top - frame.top + (box.height - imageHeight) / 2 + imageHeight * 0.4995;
+  const reach = Math.hypot(Math.max(originX, fieldWidth - originX), Math.max(originY, fieldHeight - originY));
   const step = 10.5;
   dots = [];
   for (let n = 1; step * Math.sqrt(n) < reach; n++) {
     const radius = step * Math.sqrt(n);
-    dots.push({ x: centerX + Math.cos(n * goldenAngle) * radius, y: centerY + Math.sin(n * goldenAngle) * radius, d: radius });
+    dots.push({ x: originX + Math.cos(n * goldenAngle) * radius, y: originY + Math.sin(n * goldenAngle) * radius, d: radius });
   }
   drawField();
 }
@@ -99,8 +100,13 @@ function wakeField() {
   if (!fieldFrame) fieldFrame = requestAnimationFrame(tickField);
 }
 
+function addRipple(x, y) {
+  ripples.push({ x, y, start: performance.now(), reach: Math.hypot(Math.max(x, fieldWidth - x), Math.max(y, fieldHeight - y)) });
+  wakeField();
+}
+
 if (!reduceMotion) {
-  fieldArea.addEventListener('pointerenter', (event) => {
+  fieldGallery.addEventListener('pointerenter', (event) => {
     if (event.pointerType !== 'mouse') return;
     const frame = fieldGallery.getBoundingClientRect();
     loupe.x = loupe.targetX = event.clientX - frame.left;
@@ -109,7 +115,7 @@ if (!reduceMotion) {
     wakeField();
   });
 
-  fieldArea.addEventListener('pointermove', (event) => {
+  fieldGallery.addEventListener('pointermove', (event) => {
     if (event.pointerType !== 'mouse') return;
     const frame = fieldGallery.getBoundingClientRect();
     loupe.targetX = event.clientX - frame.left;
@@ -118,20 +124,19 @@ if (!reduceMotion) {
     wakeField();
   });
 
-  fieldArea.addEventListener('pointerleave', () => {
+  fieldGallery.addEventListener('pointerleave', () => {
     loupe.target = 0;
     wakeField();
   });
 
-  fieldArea.addEventListener('pointerdown', (event) => {
+  fieldGallery.addEventListener('pointerdown', (event) => {
     const frame = fieldGallery.getBoundingClientRect();
-    const x = event.clientX - frame.left;
-    const y = event.clientY - frame.top;
-    ripples.push({ x, y, start: performance.now(), reach: Math.hypot(Math.max(x, fieldWidth - x), Math.max(y, fieldHeight - y)) });
-    wakeField();
+    addRipple(event.clientX - frame.left, event.clientY - frame.top);
   });
 
-  fieldViews.querySelector('.buy__view').decode().then(() => {
+  document.addEventListener('view', () => addRipple(originX, originY));
+
+  document.addEventListener('land', () => {
     landedAt = performance.now() + 800;
     wakeField();
   });
